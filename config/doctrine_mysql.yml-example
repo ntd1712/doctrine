@@ -1,0 +1,252 @@
+doctrine: # https://www.doctrine-project.org/projects/doctrine-bundle/en/latest/configuration.html
+  dbal:
+    default_connection: 'default'
+    types:
+      double:
+        class: 'MyApplication\Doctrine\Type\DoubleType'
+        commented: true
+      mediumint:
+        class: 'MyApplication\Doctrine\Type\MediumIntType'
+      timestamp:
+        class: 'MyApplication\Doctrine\Type\TimestampType'
+      tinyint:
+        class: 'MyApplication\Doctrine\Type\TinyIntType'
+      uuid:
+        class: 'MyApplication\Doctrine\Type\UuidType'
+    connections:
+      default:
+        dbname: ~
+        host: 'localhost'
+        port: 3306
+        user: 'root'
+        password: ~
+        charset: 'utf8'
+        path: ~
+        memory: ~
+        unix_socket: ~
+        persistent: ~
+        protocol: ~
+        service: ~
+        servicename: ~
+        sessionMode: ~
+        server: ~
+        default_dbname: ~
+        sslmode: ~
+        sslrootcert: ~
+        sslcert: ~
+        sslkey: ~
+        sslcrl: ~
+        pooled: ~
+        MultipleActiveResultSets: ~
+        use_savepoints: true
+        driver: 'pdo_mysql'
+        platform_service: ~
+        auto_commit: true
+        schema_filter: ~
+        logging: 'Doctrine\DBAL\Logging\DebugStack'
+        profiling: ~
+        profiling_collect_backtrace: false
+        profiling_collect_schema_errors: true
+        server_version: ~
+        driver_class: ~
+        wrapper_class: ~
+        shard_choser: ~
+        shard_choser_service: ~
+        keep_slave: ~
+        options:
+#          key: 'value'
+        mapping_types:
+          enum: 'string'
+          double: 'double'
+          mediumint: 'mediumint'
+          real: 'real'
+          timestamp: 'timestamp'
+          tinyint: 'tinyint'
+          uuid: 'uuid'
+        default_table_options:
+          charset: 'utf8'
+          collate: 'utf8_general_ci'
+          engine: 'InnoDB'
+        slaves:
+          slave1:
+            dbname: ~
+            host: 'localhost'
+            port: ~
+            user: 'root'
+            password: ~
+            charset: ~
+            path: ~
+            memory: ~
+            unix_socket: ~
+            persistent: ~
+            protocol: ~
+            service: ~
+            servicename: ~
+            sessionMode: ~
+            server: ~
+            default_dbname: ~
+            sslmode: ~
+            sslrootcert: ~
+            sslcert: ~
+            sslkey: ~
+            sslcrl: ~
+            pooled: ~
+            MultipleActiveResultSets: ~
+        shards:
+          id: ~
+          dbname: ~
+          host: 'localhost'
+          port: ~
+          user: 'root'
+          password: ~
+          charset: ~
+          path: ~
+          memory: ~
+          unix_socket: ~
+          persistent: ~
+          protocol: ~
+          service: ~
+          servicename: ~
+          sessionMode: ~
+          server: ~
+          default_dbname: ~
+          sslmode: ~
+          sslrootcert: ~
+          sslcert: ~
+          sslkey: ~
+          sslcrl: ~
+          pooled: ~
+          MultipleActiveResultSets: ~
+  orm:
+    default_entity_manager: 'default'
+    auto_generate_proxy_classes: false
+    proxy_dir: '/path/to/proxy/dir'
+    proxy_namespace: 'Proxies'
+    entity_managers:
+      default:
+        query_cache_driver:
+          type: 'array'
+          id: ~
+          pool: ~
+        metadata_cache_driver:
+          type: ~ # array, apc, apcu, memcache, memcached, redis, wincache, zenddata, xcache
+          host: ~
+          port: ~
+          instance_class: ~
+          class: ~
+          id: ~
+          namespace: ~
+          cache_provider: ~
+          pool: ~
+        result_cache_driver:
+          type: array
+          id: ~
+          pool: ~
+        entity_listeners:
+          entities:
+            Acme\HelloBundle\Entity\Author:
+              listeners:
+                Acme\HelloBundle\EventListener\ExampleListener:
+                  events:
+                    type: 'preUpdate'
+                    method: 'preUpdate'
+        connection: 'default'
+        class_metadata_factory_name: 'Doctrine\ORM\Mapping\ClassMetadataFactory'
+        default_repository_class: 'Doctrine\ORM\EntityRepository'
+        auto_mapping: false
+        naming_strategy: 'doctrine.orm.naming_strategy.default'
+        quote_strategy: 'doctrine.orm.quote_strategy.default'
+        entity_listener_resolver: ~
+        repository_factory: 'Doctrine\ORM\Repository\DefaultRepositoryFactory'
+        second_level_cache:
+          region_cache_driver:
+            type: ~
+            id: ~
+            pool: ~
+          region_lock_lifetime: 60
+          log_enabled: true
+          region_lifetime: 0
+          enabled: true
+          factory: ~
+          regions:
+            name:
+              cache_driver:
+                type: ~
+                id: ~
+                pool: ~
+              lock_path: '%kernel.cache_dir%/doctrine/orm/slc/filelock'
+              lock_lifetime: 60
+              type: default
+              lifetime: 0
+              service: ~
+              name: ~
+            loggers:
+              name:
+                name: ~
+                service: ~
+        hydrators:
+          ListHydrator: 'Acme\HelloBundle\Hydrators\ListHydrator'
+        mappings:
+          mapping_name:
+            mapping: true
+            type: 'annotation'
+            dir: '/path/to/entity/dir'
+            alias: ~
+            prefix: ~
+            is_bundle: ~
+            use_simple_annotation_reader: false
+        ast:
+          doctrine.customOutputWalker: 'MyApplication\Doctrine\Query\CustomOutputWalker'
+        dql:
+          string_functions:
+            binary: 'DoctrineExtensions\Query\Sqlite\Binary'
+            char_length: 'DoctrineExtensions\Query\Sqlite\CharLength'
+            concat_ws: 'DoctrineExtensions\Query\Sqlite\ConcatWs'
+            countif: 'DoctrineExtensions\Query\Sqlite\CountIf'
+            crc32: 'DoctrineExtensions\Query\Sqlite\Crc32'
+            degrees: 'DoctrineExtensions\Query\Sqlite\Degrees'
+            field: 'DoctrineExtensions\Query\Sqlite\Field'
+            find_in_set: 'DoctrineExtensions\Query\Sqlite\FindInSet'
+            group_concat: 'DoctrineExtensions\Query\Sqlite\GroupConcat'
+            ifelse: 'DoctrineExtensions\Query\Sqlite\IfElse'
+            ifnull: 'DoctrineExtensions\Query\Sqlite\IfNull'
+            match: 'DoctrineExtensions\Query\Sqlite\MatchAgainst'
+            md5: 'DoctrineExtensions\Query\Sqlite\Md5'
+            nullif: 'DoctrineExtensions\Query\Sqlite\NullIf'
+            radians: 'DoctrineExtensions\Query\Sqlite\Radians'
+            regexp: 'DoctrineExtensions\Query\Sqlite\Regexp'
+            replace: 'DoctrineExtensions\Query\Sqlite\Replace'
+            sha1: 'DoctrineExtensions\Query\Sqlite\Sha1'
+            sha2: 'DoctrineExtensions\Query\Sqlite\Sha2'
+            soundex: 'DoctrineExtensions\Query\Sqlite\Soundex'
+            uuid_short: 'DoctrineExtensions\Query\Sqlite\UuidShort'
+          numeric_functions:
+            round: 'DoctrineExtensions\Query\Sqlite\Round'
+          datetime_functions:
+            date: 'DoctrineExtensions\Query\Sqlite\Date'
+            date_format: 'DoctrineExtensions\Query\Sqlite\DateFormat'
+            dateadd: 'DoctrineExtensions\Query\Sqlite\DateAdd'
+            datediff: 'DoctrineExtensions\Query\Sqlite\DateDiff'
+            day: 'DoctrineExtensions\Query\Sqlite\Day'
+            dayname: 'DoctrineExtensions\Query\Sqlite\DayName'
+            hour: 'DoctrineExtensions\Query\Sqlite\Hour'
+            minute: 'DoctrineExtensions\Query\Sqlite\Minute'
+            month: 'DoctrineExtensions\Query\Sqlite\Month'
+            monthname: 'DoctrineExtensions\Query\Sqlite\MonthName'
+            second: 'DoctrineExtensions\Query\Sqlite\Second'
+            strftime: 'DoctrineExtensions\Query\Sqlite\StrfTime'
+            strtodate: 'DoctrineExtensions\Query\Sqlite\StrToDate'
+            time: 'DoctrineExtensions\Query\Sqlite\Time'
+            timestampadd: 'DoctrineExtensions\Query\Sqlite\TimestampAdd'
+            timestampdiff: 'DoctrineExtensions\Query\Sqlite\TimestampDiff'
+            week: 'DoctrineExtensions\Query\Sqlite\Week'
+            weekday: 'DoctrineExtensions\Query\Sqlite\WeekDay'
+            year: 'DoctrineExtensions\Query\Sqlite\Year'
+        filters:
+          filter_name:
+            class: 'Acme\HelloBundle\Filter\SomeFilter'
+            enabled: true
+            parameters:
+              foo_param: 'bar_value'
+    resolve_target_entities:
+      Acme\InvoiceBundle\Model\InvoiceSubjectInterface: 'Acme\AppBundle\Entity\Customer'

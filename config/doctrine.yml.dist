@@ -1,0 +1,92 @@
+doctrine:
+  entity_managers:
+    default:
+      connection: 'default'
+      result_cache_driver:
+        type: 'array'
+#        type: 'filesystem'
+#        directory: '%base_path%/storage/framework/cache/results'
+      query_cache_driver:
+        type: 'array'
+#        type: 'filesystem'
+#        directory: '%base_path%/storage/framework/cache/queries'
+      metadata_cache_driver:
+        type: 'array'
+#        type: 'filesystem'
+#        directory: '%base_path%/storage/framework/cache/metadata'
+      mappings:
+        Chaos\Modules\Account\Entity:
+          mapping: true
+          type: 'annotation'
+          dir: '%base_path%/modules/core/Account/src/Entity'
+          alias: 'Account'
+          use_simple_annotation_reader: false
+        Chaos\Modules\Lookup\Entity:
+          mapping: true
+          type: 'annotation'
+          dir: '%base_path%/modules/core/Lookup/src/Entity'
+          alias: 'Lookup'
+          use_simple_annotation_reader: false
+      dql:
+        string_functions:
+          JSON_EXTRACT: Scienta\DoctrineJsonFunctions\Query\AST\Functions\Mysql\JsonExtract
+    mysql:
+      connection: 'mysql'
+      metadata_cache_driver:
+        type: 'array'
+      mappings:
+        Chaos\Modules\Demo\Entity:
+          mapping: true
+          type: 'annotation'
+          dir: '%base_path%/modules/app/Demo/Entity'
+          alias: 'Demo'
+          use_simple_annotation_reader: false
+  document_managers:
+    mongodb:
+      connection: 'mongodb'
+      database: 'default'
+      metadata_cache_driver:
+        type: 'array'
+      mappings:
+        Chaos\Modules\Mongo\Document:
+          mapping: true
+          type: 'annotation'
+          dir: '%base_path%/modules/app/Mongo/Document'
+          alias: 'Mongo'
+  connections:
+    default:
+      dbname: '%db.database%'
+      host: '%db.host%'
+      port: '%db.port%'
+      user: '%db.username%'
+      password: '%db.password%'
+      charset: '%db.charset%'
+      unix_socket: '%db.unix_socket%'
+      driver: 'pdo_mysql'
+      schema_filter:
+    mysql:
+      dbname: '%^DB2_DATABASE%'
+      host: '%^DB2_HOST%'
+      port: '%^DB2_PORT%'
+      user: '%^DB2_USERNAME%'
+      password: '%^DB2_PASSWORD%'
+      charset: 'utf8'
+      unix_socket:
+      driver: 'mysqli'
+      schema_filter:
+      driverOptions: {}
+    mongodb:
+      server: 'mongodb://localhost:27017'
+      options: {}
+      driver_options:
+        typeMap: {root: 'array', document: 'array'}
+  proxy_interface_name: 'Doctrine\Persistence\Proxy'
+  proxy_namespace: 'DoctrineProxies'
+  proxy_dir: '%base_path%/storage/framework/cache/proxies'
+  auto_generate_proxy_classes: 2
+  hydrator_namespace: 'DoctrineHydrators'
+  hydrator_dir: '%base_path%/storage/framework/cache/hydrators'
+  auto_generate_hydrator_classes: 1
+  default_entity_manager: 'default'
+  default_document_manager: 'default'
+  default_connection: 'default'
