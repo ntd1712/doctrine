@@ -1,0 +1,76 @@
+doctrine_mongodb: # https://www.doctrine-project.org/projects/doctrine-mongodb-bundle/en/latest/config.html
+  document_managers:
+    id:
+      connection: ~
+      database: ~
+      default_document_repository_class: 'Doctrine\ODM\MongoDB\Repository\DocumentRepository'
+      default_gridfs_repository_class: 'Doctrine\ODM\MongoDB\Repository\DefaultGridFSRepository'
+      repository_factory: ~
+      persistent_collection_factory: ~
+      logging: true
+      auto_mapping: false
+      metadata_cache_driver:
+        type: ~ # array, apc, apcu, memcache, memcached, redis, wincache, zenddata, xcache
+        host: ~
+        port: ~
+        instance_class: ~
+        class: ~
+      mappings:
+        mapping_name:
+          mapping: true
+          type: 'annotation'
+          dir: '/path/to/entity/dir'
+          alias: ~
+          prefix: ~
+          is_bundle: ~
+      filters:
+        filter_name:
+          class: 'Acme\HelloBundle\Filter\SomeFilter'
+          enabled: true
+          parameters:
+            foo_param: 'bar_value'
+    dm2:
+      connection: 'conn2'
+      database: 'db2'
+      mappings:
+        AcmeHelloBundle: ~
+  connections:
+    id:
+      server: ~
+      options:
+        authMechanism: ~
+        connect: ~
+        connectTimeoutMS: ~
+        db: ~
+        authSource: ~
+        journal: ~
+        password: ~
+        readPreference: ~
+        readPreferenceTags: ~
+        replicaSet: ~ # replica set name
+        socketTimeoutMS: ~
+        ssl: ~
+        username: ~
+        w: ~
+        wTimeoutMS: ~
+      driver_options:
+        context: ~ # stream context to use for connection
+    conn2:
+      server: ~
+  proxy_namespace: 'MongoDBODMProxies'
+  proxy_dir: '/path/to/proxy/dir'
+  auto_generate_proxy_classes: 0
+  hydrator_namespace: 'Hydrators'
+  hydrator_dir: '/path/to/hydrator/dir'
+  auto_generate_hydrator_classes: 0
+  persistent_collection_namespace: 'PersistentCollections'
+  persistent_collection_dir: '/path/to/persistent_collection/dir'
+  auto_generate_persistent_collection_classes: 0
+  default_document_manager: 'dm2'
+  default_connection: 'conn2'
+  default_database: ~
+  default_commit_options:
+    safe: 2      # boolean or positive integer for replication
+    fsync: false # boolean
+    timeout: 10  # integer >= -1
+  fixture_loader: 'Doctrine\Common\DataFixtures\Loader'

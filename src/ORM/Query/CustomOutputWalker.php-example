@@ -1,0 +1,52 @@
+<?php
+
+namespace Chaos\Support\Doctrine\ORM\Query;
+
+use Doctrine\ORM\Query\SqlWalker;
+
+/**
+ * Class CustomOutputWalker.
+ *
+ * @author t(-.-t) <ntd1712@mail.com>
+ */
+class CustomOutputWalker extends SqlWalker
+{
+    /**
+     * {@inheritDoc}
+     *
+     * @param \Doctrine\ORM\Query\AST\WhereClause $whereClause WhereClause AST node.
+     *
+     * @throws \Doctrine\ORM\Query\AST\ASTException
+     *
+     * @return string
+     */
+    public function walkWhereClause($whereClause)
+    {
+        $sql = parent::walkWhereClause($whereClause);
+
+        if (null !== ($options = $this->getQuery()->getHint('options')) && $options['multitenant']['enabled']) {
+            $fromClause = $this->getQuery()->getAST()->fromClause;
+            $declarations = $fromClause->identificationVariableDeclarations;
+
+            if (1 === count($declarations)) {
+                /* @var \Doctrine\ORM\Mapping\ClassMetadata $metadata */
+                $dqlAlias = $declarations[0]->rangeVariableDeclaration->aliasIdentificationVariable;
+                $metadata = $this->getQueryComponent($dqlAlias)['metadata'];
+                $keymap = $options['multitenant']['keymap'];
+
+                if (isset($metadata->fieldMappings[$keymap])) {
+                    $parts = explode(' ', $fromClause->dispatch($this));
+
+                    return ($sql ? $sql . ' AND ' : ' WHERE ') . sprintf(
+                        "%s.%s='%s'",
+                        end($parts),
+                        $metadata->fieldMappings[$keymap]['columnName'],
+                        $options['app']['key']
+                    );
+                }
+            }
+        }
+
+        return $sql;
+    }
+}

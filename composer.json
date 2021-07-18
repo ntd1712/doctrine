@@ -1,0 +1,36 @@
+{
+  "name": "chaos/doctrine",
+  "description": "Registry service which references all Doctrine connections and entity/document managers",
+  "keywords": [
+    "vietnam",
+    "doctrine",
+    "manager",
+    "registry"
+  ],
+  "homepage": "https://github.com/ntd1712",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "ntd1712",
+      "email": "ntd1712@mail.com"
+    }
+  ],
+  "require": {
+    "doctrine/orm": "2.9.*"
+  },
+  "require-dev": {
+    "doctrine/mongodb-odm": "2.2.*",
+    "doctrine/phpcr-odm": "1.5.*",
+    "jackalope/jackalope-doctrine-dbal": "^1.7"
+  },
+  "autoload": {
+    "psr-4": {
+      "Chaos\\Support\\Doctrine\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  }
+}
